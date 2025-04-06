@@ -1,4 +1,4 @@
-import 'package:afterlight/ui/home.dart';
+import 'package:afterlight/ui/home/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
