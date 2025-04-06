@@ -13,9 +13,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Afterlight',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blueAccent,
+          brightness: Brightness.dark,
+        ),
         scaffoldBackgroundColor: Color.fromARGB(255, 4, 9, 24),
+        brightness: Brightness.dark,
       ),
+      debugShowCheckedModeBanner: false,
       home: const HomeView(),
     );
   }
