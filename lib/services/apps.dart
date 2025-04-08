@@ -11,6 +11,9 @@ class AppsService {
       onlyAppsWithLaunchIntent: true,
     );
 
+    // Remove Afterlight
+    apps.removeWhere((app) => app.packageName == 'dev.ae1.afterlight');
+
     // Sort apps by name
     apps.sort((a, b) => a.appName.compareTo(b.appName));
   }
