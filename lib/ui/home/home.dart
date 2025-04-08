@@ -3,6 +3,7 @@ import 'package:afterlight/ui/settings/settings.dart';
 import 'package:apps_handler/apps_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gaimon/gaimon.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -48,6 +49,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
+        Gaimon.selection();
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => SettingsView()),
@@ -80,6 +82,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
               onTap: () {
+                Gaimon.selection();
                 AppsHandler.openApp(appsService.apps[index].packageName);
               },
             );
