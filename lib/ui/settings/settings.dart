@@ -1,4 +1,6 @@
+import 'package:afterlight/ui/widgets/icon.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -15,7 +17,7 @@ class _SettingsViewState extends State<SettingsView> {
         title: const Text('Settings'),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      body: const Text('Body'),
+      body: ListView(children: [Gap(35), Center(child: IconWidget(size: 45))]),
     );
   }
 }
