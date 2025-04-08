@@ -1,7 +1,7 @@
 import 'package:afterlight/main.dart';
 import 'package:afterlight/ui/home/home.dart';
+import 'package:afterlight/ui/widgets/icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -32,17 +32,7 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SizedBox(
-          width: 250,
-          height: 250,
-          child: SvgPicture.asset(
-            'assets/svgs/icon.svg',
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).primaryColor,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
+        child: IconWidget(size: 250, color: Theme.of(context).primaryColor),
       ),
     );
   }
