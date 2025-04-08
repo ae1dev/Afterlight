@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeView(),
+      home: const SplashView(),
     );
   }
 }
