@@ -1,9 +1,12 @@
-import 'package:afterlight/ui/home/home.dart';
+import 'package:afterlight/services/apps.dart';
+import 'package:afterlight/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+AppsService appsService = AppsService();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

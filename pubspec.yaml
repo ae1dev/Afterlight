@@ -16,7 +16,7 @@ dependencies:
   device_info_plus: ^11.3.3
   battery_plus: ^6.2.1
   wakelock_plus: ^1.2.11
-  installed_apps: ^1.6.0
+  apps_handler: ^1.0.1
   external_app_launcher: ^4.0.3
   hive_ce: ^2.10.1
   hive_ce_flutter: ^2.2.0
