@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Afterlight',
       theme: ThemeData(
+        primaryColor: Color.fromARGB(255, 3, 174, 236),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
+          seedColor: Color.fromARGB(255, 3, 174, 236),
           brightness: Brightness.dark,
         ),
         scaffoldBackgroundColor: Color.fromARGB(255, 4, 9, 24),
