@@ -16,6 +16,35 @@ class _HomeViewState extends State<HomeView> {
   int gridVerticalCount = 4;
 
   @override
+  void initState() {
+    monitorApps();
+    super.initState();
+  }
+
+  /// Monitor apps for changes
+  void monitorApps() {
+    AppsHandler.appChanges.listen((event) {
+      switch (event.event) {
+        case AppEventType.installed:
+          print('App installed: ${event.packageName}');
+          // Refresh apps
+          appsService.init();
+          setState(() {});
+          break;
+        case AppEventType.uninstalled:
+          print('App uninstalled: ${event.packageName}');
+          // Remove app
+          appsService.removeApp(event.packageName);
+          setState(() {});
+          break;
+        case AppEventType.updated:
+          print('App updated: ${event.packageName}');
+          break;
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {

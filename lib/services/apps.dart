@@ -17,4 +17,8 @@ class AppsService {
     // Sort apps by name
     apps.sort((a, b) => a.appName.compareTo(b.appName));
   }
+
+  void removeApp(String packageName) {
+    apps.removeWhere((app) => app.packageName == packageName);
+  }
 }
