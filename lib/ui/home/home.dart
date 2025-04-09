@@ -13,9 +13,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int gridHorizontalCount = 4;
-  int gridVerticalCount = 4;
-
   @override
   void initState() {
     monitorApps();
