@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
           seedColor: Color.fromARGB(255, 3, 174, 236),
           brightness: Brightness.dark,
         ),
+        fontFamily: 'Oita',
         scaffoldBackgroundColor: Color.fromARGB(255, 4, 9, 24),
         brightness: Brightness.dark,
       ),
