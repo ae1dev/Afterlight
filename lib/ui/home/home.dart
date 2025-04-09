@@ -58,26 +58,6 @@ class _HomeViewState extends State<HomeView> {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(appsService.apps[index].appName),
-              leading:
-                  appsService.apps[index].appIcon == null
-                      ? null
-                      : SizedBox(
-                        width: 48,
-                        height: 48,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.memory(
-                            Uint8List.fromList(
-                              appsService.apps[index].appIcon ?? [],
-                            ),
-                            fit: BoxFit.contain,
-                            filterQuality: FilterQuality.medium,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Icon(Icons.broken_image);
-                            },
-                          ),
-                        ),
-                      ),
               onTap: () {
                 Gaimon.selection();
                 AppsHandler.openApp(appsService.apps[index].packageName);
