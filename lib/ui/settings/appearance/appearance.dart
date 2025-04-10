@@ -1,5 +1,4 @@
 import 'package:afterlight/main.dart';
-import 'package:afterlight/ui/widgets/icon.dart';
 import 'package:afterlight/utils/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -33,7 +32,6 @@ class _AppearanceViewState extends State<AppearanceView> {
             ),
           ),
           Gap(35),
-          Center(child: IconWidget(size: 45)),
         ],
       ),
     );
