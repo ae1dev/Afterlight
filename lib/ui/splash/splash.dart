@@ -22,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
     await appsService.init();
 
     // Navigate to home
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => HomeView()),
     );
