@@ -1,16 +1,17 @@
-import 'package:afterlight/main.dart';
+import 'package:afterlight/services/apps.dart';
 import 'package:afterlight/ui/home/home.dart';
 import 'package:afterlight/ui/widgets/icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SplashView extends StatefulWidget {
+class SplashView extends ConsumerStatefulWidget {
   const SplashView({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  ConsumerState<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashViewState extends State<SplashView> {
+class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
     _init();
@@ -18,14 +19,23 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Future<void> _init() async {
-    // Get apps
-    await appsService.init();
+    try {
+      // Get apps
+      await ref.read(appServiceProvider.notifier).init();
 
-    // Navigate to home
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeView()),
-    );
+      // Navigate to home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeView()),
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder:
+            (context) =>
+                AlertDialog(title: Text('Error'), content: Text(e.toString())),
+      );
+    }
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:afterlight/main.dart';
 import 'package:afterlight/ui/settings/appearance/appearance.dart';
+import 'package:afterlight/ui/settings/favorites/favorites.dart';
 import 'package:afterlight/ui/widgets/icon.dart';
 import 'package:afterlight/utils/feedback.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,17 @@ class _SettingsViewState extends State<SettingsView> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AppearanceView()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Favorites'),
+            trailing: const Icon(Symbols.arrow_forward_rounded),
+            onTap: () {
+              callHaptic();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoritesView()),
               );
             },
           ),

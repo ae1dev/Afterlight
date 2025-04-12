@@ -1,17 +1,18 @@
-import 'package:afterlight/main.dart';
+import 'package:afterlight/services/apps.dart';
 import 'package:afterlight/ui/settings/settings.dart';
 import 'package:afterlight/utils/feedback.dart';
 import 'package:apps_handler/apps_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  ConsumerState<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     monitorApps();
@@ -25,13 +26,13 @@ class _HomeViewState extends State<HomeView> {
         case AppEventType.installed:
           print('App installed: ${event.packageName}');
           // Refresh apps
-          appsService.init();
+          ref.read(appServiceProvider.notifier).init();
           setState(() {});
           break;
         case AppEventType.uninstalled:
           print('App uninstalled: ${event.packageName}');
           // Remove app
-          appsService.removeApp(event.packageName);
+          ref.read(appServiceProvider.notifier).removeApp(event.packageName);
           setState(() {});
           break;
         case AppEventType.updated:
@@ -52,17 +53,18 @@ class _HomeViewState extends State<HomeView> {
         );
       },
       child: Scaffold(
-        body: ListView.builder(
-          itemCount: appsService.apps.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(appsService.apps[index].appName),
-              onTap: () {
-                callHaptic();
-                AppsHandler.openApp(appsService.apps[index].packageName);
-              },
-            );
-          },
+        body: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              ref.watch(appServiceProvider).favoriteApps.length,
+              (index) => ListTile(
+                title: Text(
+                  ref.watch(appServiceProvider).favoriteApps[index].appName,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

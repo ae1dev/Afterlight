@@ -1,22 +1,24 @@
-import 'package:afterlight/services/apps.dart';
+import 'package:afterlight/models/hive_registrar.g.dart';
 import 'package:afterlight/services/settings.dart';
 import 'package:afterlight/ui/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 late Box box;
-AppsService appsService = AppsService();
 SettingsService settingsService = SettingsService();
+
 void main() async {
   // Initialize Hive
   await Hive.initFlutter();
+  Hive.registerAdapters();
   box = await Hive.openBox('afterlightBox');
 
   // Setup settings
   settingsService.setup();
 
   // Run the app
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
