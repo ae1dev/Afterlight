@@ -15,6 +15,8 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
+  bool _validDrag = false;
+
   @override
   void initState() {
     monitorApps();
@@ -130,37 +132,50 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onVerticalDragEnd: (details) {
-        if (details.primaryVelocity! < 0) {
-          // Swipe up
-          _showAllAppsDrawer();
-        }
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              ref.watch(appServiceProvider).favoriteApps.length,
-              (index) => ListTile(
-                title: Text(
-                  ref.watch(appServiceProvider).favoriteApps[index].appName,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GestureDetector(
+          onVerticalDragStart: (details) {
+            // Check if the drag is valid (not a swipe up from the navbar)
+            if ((constraints.maxHeight - details.globalPosition.dy) > 80) {
+              _validDrag = true;
+            }
+          },
+          onVerticalDragEnd: (details) {
+            // Check if the drag is valid then show the drawer
+            if (details.primaryVelocity! < 0 && _validDrag) {
+              // Swipe up
+              _showAllAppsDrawer();
+            }
+
+            _validDrag = false;
+          },
+          child: Scaffold(
+            body: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  ref.watch(appServiceProvider).favoriteApps.length,
+                  (index) => ListTile(
+                    title: Text(
+                      ref.watch(appServiceProvider).favoriteApps[index].appName,
+                    ),
+                    onTap: () async {
+                      callHaptic();
+                      await AppsHandler.openApp(
+                        ref
+                            .read(appServiceProvider)
+                            .favoriteApps[index]
+                            .packageName,
+                      );
+                    },
+                  ),
                 ),
-                onTap: () async {
-                  callHaptic();
-                  await AppsHandler.openApp(
-                    ref
-                        .read(appServiceProvider)
-                        .favoriteApps[index]
-                        .packageName,
-                  );
-                },
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
