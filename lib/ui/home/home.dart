@@ -131,13 +131,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {
-        callHaptic();
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SettingsView()),
-        );
-      },
       onVerticalDragEnd: (details) {
         if (details.primaryVelocity! < 0) {
           // Swipe up
@@ -154,6 +147,15 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 title: Text(
                   ref.watch(appServiceProvider).favoriteApps[index].appName,
                 ),
+                onTap: () async {
+                  callHaptic();
+                  await AppsHandler.openApp(
+                    ref
+                        .read(appServiceProvider)
+                        .favoriteApps[index]
+                        .packageName,
+                  );
+                },
               ),
             ),
           ),
