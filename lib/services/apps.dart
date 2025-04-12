@@ -27,10 +27,17 @@ class AppsService extends StateNotifier<AppState> {
     }
 
     // Remove Afterlight
-    state.apps.removeWhere((app) => app.packageName == 'dev.ae1.afterlight');
+    state = state.copyWith(
+      apps:
+          state.apps
+              .where((app) => app.packageName != 'dev.ae1.afterlight')
+              .toList(),
+    );
 
     // Sort apps by name
-    state.apps.sort((a, b) => a.appName.compareTo(b.appName));
+    state = state.copyWith(
+      apps: [...state.apps]..sort((a, b) => a.appName.compareTo(b.appName)),
+    );
 
     // Get favorites
     state = state.copyWith(
