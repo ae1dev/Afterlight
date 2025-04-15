@@ -61,6 +61,7 @@ class AppsService extends StateNotifier<AppState> {
 
   // Add favorite
   void addFavorite(String packageName) {
+    // Set states
     state = state.copyWith(
       favorites: [
         ...state.favorites,
@@ -76,6 +77,9 @@ class AppsService extends StateNotifier<AppState> {
         state.apps.firstWhere((app) => app.packageName == packageName),
       ],
     );
+
+    // Save to Hive
+    box.put('favorites', state.favorites);
   }
 
   // Remove favorite
