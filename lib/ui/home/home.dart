@@ -121,12 +121,81 @@ class _HomeViewState extends ConsumerState<HomeView> {
                             callHaptic();
                             await AppsHandler.openApp(app.packageName);
                           },
+                          onLongPress: () {
+                            callHaptic();
+                            _showAppInfBottomSheet(app);
+                          },
                         );
                       },
                     ),
                   ],
                 ),
           ),
+    );
+  }
+
+  void _showAppInfBottomSheet(AppInfo app) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        bool isFavorite = ref
+            .read(appServiceProvider.notifier)
+            .isFavorite(app.packageName);
+
+        return Container(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 15),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[600],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              Text(app.appName, style: const TextStyle(fontSize: 20)),
+              const Gap(10),
+              const Divider(),
+              ListTile(
+                title: Text(
+                  isFavorite ? 'Remove from favorites' : 'Add to favorites',
+                ),
+                onTap: () {
+                  callHaptic();
+                  if (isFavorite) {
+                    ref
+                        .read(appServiceProvider.notifier)
+                        .removeFavorite(app.packageName);
+                  } else {
+                    ref
+                        .read(appServiceProvider.notifier)
+                        .addFavorite(app.packageName);
+                  }
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('App Info'),
+                onTap: () {
+                  callHaptic();
+                  Navigator.pop(context);
+                  AppsHandler.openAppSettings(app.packageName);
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -156,20 +225,22 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   ref.watch(appServiceProvider).favoriteApps.length,
-                  (index) => ListTile(
-                    title: Text(
-                      ref.watch(appServiceProvider).favoriteApps[index].appName,
-                    ),
-                    onTap: () async {
-                      callHaptic();
-                      await AppsHandler.openApp(
-                        ref
-                            .read(appServiceProvider)
-                            .favoriteApps[index]
-                            .packageName,
-                      );
-                    },
-                  ),
+                  (index) {
+                    AppInfo app =
+                        ref.watch(appServiceProvider).favoriteApps[index];
+
+                    return ListTile(
+                      title: Text(app.appName),
+                      onTap: () async {
+                        callHaptic();
+                        await AppsHandler.openApp(app.packageName);
+                      },
+                      onLongPress: () {
+                        callHaptic();
+                        _showAppInfBottomSheet(app);
+                      },
+                    );
+                  },
                 ),
               ),
             ),
