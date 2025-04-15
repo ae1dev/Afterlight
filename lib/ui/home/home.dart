@@ -68,7 +68,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
-                          const Gap(8),
+                          const Gap(15),
                           Container(
                             width: 40,
                             height: 4,
