@@ -28,19 +28,14 @@ class _HomeViewState extends ConsumerState<HomeView> {
     AppsHandler.appChanges.listen((event) {
       switch (event.event) {
         case AppEventType.installed:
-          print('App installed: ${event.packageName}');
           // Refresh apps
           ref.read(appServiceProvider.notifier).init();
-          setState(() {});
           break;
         case AppEventType.uninstalled:
-          print('App uninstalled: ${event.packageName}');
           // Remove app
           ref.read(appServiceProvider.notifier).removeApp(event.packageName);
-          setState(() {});
           break;
         case AppEventType.updated:
-          print('App updated: ${event.packageName}');
           break;
       }
     });
