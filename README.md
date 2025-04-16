@@ -1,3 +1,5 @@
+![Banner](./GH_Banner.png)
+
 # Afterlight Launcher
 
 Afterlight is a modern, minimalist Android launcher built with Flutter, designed to reduce phone usage with a clean and efficient interface.
