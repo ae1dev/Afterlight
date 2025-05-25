@@ -236,7 +236,11 @@ class _HomeViewState extends ConsumerState<HomeView> {
             ),
             TextButton(
               onPressed: () {
-                _showAllAppsDrawer();
+                callHaptic();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsView()),
+                );
               },
               child: Text('Open Settings'),
             ),
