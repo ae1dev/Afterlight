@@ -215,33 +215,56 @@ class _HomeViewState extends ConsumerState<HomeView> {
             _validDrag = false;
           },
           child: Scaffold(
-            body: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  ref.watch(appServiceProvider).favoriteApps.length,
-                  (index) {
-                    AppInfo app =
-                        ref.watch(appServiceProvider).favoriteApps[index];
-
-                    return ListTile(
-                      title: Text(app.appName),
-                      onTap: () async {
-                        callHaptic();
-                        await AppsHandler.openApp(app.packageName);
-                      },
-                      onLongPress: () {
-                        callHaptic();
-                        _showAppInfBottomSheet(app);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ),
+            body: Center(child: SingleChildScrollView(child: buildList())),
           ),
         );
       },
+    );
+  }
+
+  Widget buildList() {
+    //No favorite apps
+    if (ref.watch(appServiceProvider).favoriteApps.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Add apps to your favorites to show up here.',
+              textAlign: TextAlign.center,
+            ),
+            TextButton(
+              onPressed: () {
+                _showAllAppsDrawer();
+              },
+              child: Text('Open Settings'),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        ref.watch(appServiceProvider).favoriteApps.length,
+        (index) {
+          AppInfo app = ref.watch(appServiceProvider).favoriteApps[index];
+
+          return ListTile(
+            title: Text(app.appName),
+            onTap: () async {
+              callHaptic();
+              await AppsHandler.openApp(app.packageName);
+            },
+            onLongPress: () {
+              callHaptic();
+              _showAppInfBottomSheet(app);
+            },
+          );
+        },
+      ),
     );
   }
 }
