@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               seedColor: Color.fromARGB(255, 3, 174, 236),
               brightness: Brightness.dark,
             ),
-            fontFamily: 'Oita',
+            fontFamily: 'Stratum2',
             scaffoldBackgroundColor:
                 lBox.get('backgroundBlack', defaultValue: false)
                     ? Colors.black

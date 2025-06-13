@@ -51,6 +51,11 @@ flutter:
     - assets/svgs/
 
   fonts:
-    - family: Oita
+    - family: Stratum2
       fonts:
-        - asset: assets/fonts/Oita.ttf
+        - asset: assets/fonts/stratum2-regular.ttf
+          weight: 500
+        - asset: assets/fonts/stratum2-medium.ttf
+          weight: 600
+        - asset: assets/fonts/stratum2-bold.ttf
+          weight: 700
