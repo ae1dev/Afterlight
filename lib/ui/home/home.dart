@@ -79,10 +79,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'All Apps',
+                                    'ALL APPS',
                                     style: TextStyle(
                                       fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
