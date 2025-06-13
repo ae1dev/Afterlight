@@ -93,8 +93,12 @@ class _BackupViewState extends ConsumerState<BackupView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Backup & Restore'),
+        title: const Text(
+          'BACKUP & RESTORE',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        centerTitle: true,
       ),
       body: ListView(
         children: [

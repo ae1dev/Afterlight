@@ -20,8 +20,12 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text(
+          'SETTINGS',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        centerTitle: true,
       ),
       body: ListView(
         children: [

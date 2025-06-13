@@ -15,8 +15,12 @@ class _AppearanceViewState extends State<AppearanceView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Appearance'),
+        title: const Text(
+          'APPEARANCE',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        centerTitle: true,
       ),
       body: ListView(
         children: [

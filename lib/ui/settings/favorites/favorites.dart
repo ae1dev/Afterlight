@@ -17,8 +17,12 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        title: const Text(
+          'FAVORITES',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        centerTitle: true,
       ),
       body: CustomScrollView(
         slivers: [
